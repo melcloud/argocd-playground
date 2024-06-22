@@ -1,0 +1,1 @@
+# Playgroun for argo CD
