@@ -28,3 +28,11 @@ install_argocd: ## Install or upgrade Argo CD
 		-f "$$PWD/configs/helm/argocd/values.yaml" \
 		--version '$(ARGO_CD_VERSION)'
 .PHONY: install_argocd
+
+install_argo_rollouts: ## Install or upgrade Argo Rollouts
+	helm upgrade argo-rollouts argo/argo-rollouts \
+		-i --namespace argo-rollouts --create-namespace \
+		-f "$$PWD/configs/helm/argo-rollouts/values.yaml" \
+		--version '$(ARGO_ROLLOUTS_VERSION)' \
+		--wait
+.PHONY: install_argo_rollouts

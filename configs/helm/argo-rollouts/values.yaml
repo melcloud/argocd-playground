@@ -1,0 +1,8 @@
+controller:
+  nodeSelector:
+    tier: cd
+  tolerations:
+  - key: tier
+    operator: Equal
+    value: cd
+    effect: NoSchedule

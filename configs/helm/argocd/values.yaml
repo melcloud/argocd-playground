@@ -22,3 +22,9 @@ server:
       nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
       nginx.ingress.kubernetes.io/ssl-passthrough: "true"
     tls: true
+  extensions:
+    enabled: true
+    contents:
+    # This integrates rollout UI with Argo CD
+    - name: argo-rollouts
+      url: https://github.com/argoproj-labs/rollout-extension/releases/download/v0.3.5/extension.tar
