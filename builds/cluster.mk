@@ -1,5 +1,6 @@
 create_cluster: ## Create a kind cluster
 	kind create cluster --name '$(CLUSTER_NAME)' --config "$$PWD/configs/cluster/argocd.yaml" \
+	&& kubectl taint nodes -l tier=system tier=system:NoSchedule \
 	&& kubectl taint nodes -l tier=cd tier=cd:NoSchedule
 .PHONY: create_cluster
 

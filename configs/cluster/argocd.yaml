@@ -4,6 +4,9 @@ nodes:
 - role: control-plane
 - role: worker
   labels:
+    tier: system
+- role: worker
+  labels:
     tier: cd
   extraPortMappings:
   - containerPort: 443
