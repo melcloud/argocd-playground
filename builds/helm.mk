@@ -8,7 +8,7 @@ add_helm_repos: ## Add required helm repositories
 install_cert_manager: ## Install or upgrade cert-manager
 	helm upgrade cert-manager jetstack/cert-manager \
 		-i --namespace cert-manager --create-namespace \
-		-f "$$PWD/configs/helm/cert-manager/values.yaml"
+		-f "$$PWD/configs/helm/cert-manager/values.yaml" \
 		--wait
 	kubectl apply -f "$$PWD/configs/cert-manager/ca.yaml"
 .PHONY: install_cert_manager
