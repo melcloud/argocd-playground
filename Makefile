@@ -1,5 +1,9 @@
 CLUSTER_NAME ?= argocd
 
+CERT_MANAGER_VERSION ?= 1.15.0
+NGINX_INGRESS_VERSION ?= 4.10.1
+ARGO_CD_VERSION ?= 7.2.1
+
 # Don't echo target content
 .SILENT:
 

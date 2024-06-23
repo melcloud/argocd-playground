@@ -9,6 +9,7 @@ install_cert_manager: ## Install or upgrade cert-manager
 	helm upgrade cert-manager jetstack/cert-manager \
 		-i --namespace cert-manager --create-namespace \
 		-f "$$PWD/configs/helm/cert-manager/values.yaml" \
+		--version '$(CERT_MANAGER_VERSION)' \
 		--wait
 	kubectl apply -f "$$PWD/configs/cert-manager/ca.yaml"
 .PHONY: install_cert_manager
@@ -17,11 +18,13 @@ install_nginx: ## Install or upgrade Nginx ingress controller
 	helm upgrade nginx ingress-nginx/ingress-nginx \
 		-i --namespace nginx --create-namespace \
 		-f "$$PWD/configs/helm/nginx/values.yaml" \
+		--version '$(NGINX_INGRESS_VERSION)' \
 		--wait
 .PHONY: install_nginx
 
 install_argocd: ## Install or upgrade Argo CD
 	helm upgrade argo-playground argo/argo-cd \
 		-i --atomic --namespace argocd --create-namespace \
-		-f "$$PWD/configs/helm/argocd/values.yaml"
+		-f "$$PWD/configs/helm/argocd/values.yaml" \
+		--version '$(ARGO_CD_VERSION)'
 .PHONY: install_argocd
