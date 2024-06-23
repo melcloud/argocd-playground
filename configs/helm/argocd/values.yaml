@@ -1,0 +1,24 @@
+dex:
+  enabled: false
+notifications:
+  enabled: false
+global:
+  domain: argocd.dev.local
+  nodeSelector:
+    tier: cd
+  tolerations:
+  - key: tier
+    operator: Equal
+    value: cd
+    effect: NoSchedule
+certificate:
+  enabled: true
+server:
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    annotations:
+      cert-manager.io/cluster-issuer: cert-issuer
+      nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+      nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+    tls: true

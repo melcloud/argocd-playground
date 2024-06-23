@@ -1,0 +1,37 @@
+crds:
+  enabled: true
+
+nodeSelector:
+  tier: system
+tolerations:
+- key: tier
+  operator: Equal
+  value: system
+  effect: NoSchedule
+
+webhook:
+  nodeSelector:
+    tier: system
+  tolerations:
+  - key: tier
+    operator: Equal
+    value: system
+    effect: NoSchedule
+
+cainjector:
+  nodeSelector:
+    tier: system
+  tolerations:
+  - key: tier
+    operator: Equal
+    value: system
+    effect: NoSchedule
+
+startupapicheck:
+  nodeSelector:
+    tier: system
+  tolerations:
+  - key: tier
+    operator: Equal
+    value: system
+    effect: NoSchedule
