@@ -14,7 +14,7 @@ install_cert_manager: ## Install or upgrade cert-manager
 .PHONY: install_cert_manager
 
 install_nginx: ## Install or upgrade Nginx ingress controller
-	helm upgrade nignx ingress-nginx/ingress-nginx \
+	helm upgrade nginx ingress-nginx/ingress-nginx \
 		-i --namespace nginx --create-namespace \
 		-f "$$PWD/configs/helm/nginx/values.yaml" \
 		--wait
