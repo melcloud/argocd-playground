@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: argo-demo-app-set
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - git:
+      repoURL: https://github.com/bjss/lunch-and-learn-argocd-playground.git
+      revision: argo-demo
+      directories:
+      - path: apps/stages/*
+  template:
+    metadata:
+      name: 'argo-demo-{{ .path.basename }}'
+    spec:
+      project: argo-demo
+      source:
+        repoURL: https://github.com/bjss/lunch-and-learn-argocd-playground.git
+        targetRevision: argo-demo
+        path: '{{ .path.path }}'
+      destination:
+        name: 'in-cluster'
+        namespace: 'argo-demo-{{ .path.basename }}'
+      syncPolicy:
+        syncOptions:
+        - CreateNamespace=true
