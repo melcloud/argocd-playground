@@ -15,13 +15,22 @@ To install Argo CD with https, followings are required:
 - **cert-manager**: issue self-signed certificate
 - **nginx ingress controller**: create routes and expose argo CD service based on ingress definition
 - **Argo CD helm chart**: install Argo CD
+
 All above steps are packaged into different make commands:
 ```bash
 make add_helm_repos
 make install_cert_manager
 make install_nginx
 make install_argocd
+make install_argo_rollouts
 ```
+
+In addition to install Argo CD, it needs to be configured to create application automatically. It requires:
+- A credential to connect to github
+- A repositories contains manifest
+- ApplicationSet to generate Application
+
+This can be done by using `make argo_setup`. The script will ask for your github username and personal access token (scoped).
 
 ### Create everything end to end
 Run `make all` to create every components end to end
@@ -33,6 +42,9 @@ Run `make clean` to clean resources
 Run `make help`
 
 ## URLs
-| Components | URL |
-|------------|-----|
-| Argo CD    | https://argocd.dev.local:8443 |
+| Components      | URL                           |
+|-----------------|-------------------------------|
+| Argo CD         | https://argocd.dev.local:8443 |
+| Demo APP DEV    | https://dev.app.local:8443    |
+| Demo APP UAT    | https://uat.app.local:8443    |
+| Demo APP PROD   | https://prod.app.local:8443   |
