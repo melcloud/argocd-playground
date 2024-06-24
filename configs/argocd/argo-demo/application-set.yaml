@@ -21,6 +21,15 @@ spec:
         repoURL: https://github.com/bjss/lunch-and-learn-argocd-playground.git
         targetRevision: argo-demo
         path: '{{ .path.path }}'
+        kustomize:
+          namePrefix: 'argo-demo-{{ .path.basename }}-'
+          images:
+          - nginx=nginx:1.27
+          commonLabels:
+            app-env: '{{ .path.basename }}'
+          commonAnnotationsEnvsubst: true
+          commonAnnotations:
+            app-source: ${ARGOCD_APP_NAME}
       destination:
         name: 'in-cluster'
         namespace: 'argo-demo-{{ .path.basename }}'
