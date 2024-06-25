@@ -29,3 +29,13 @@ install_argo_rollouts: ## Install or upgrade Argo Rollouts
 		--version '$(ARGO_ROLLOUTS_VERSION)' \
 		--wait
 .PHONY: install_argo_rollouts
+
+install_kargo: ## Install or upgrade Kargo
+	helm upgrade kargo oci://ghcr.io/akuity/kargo-charts/kargo \
+		-i --namespace kargo --create-namespace \
+		-f "$$PWD/configs/helm/kargo/values.yaml" \
+		--set api.adminAccount.passwordHash='$$2a$$10$$Zrhhie4vLz5ygtVSaif6o.qN36jgs6vjtMBdM6yrU1FOeiAAMMxOm' \
+		--set api.adminAccount.tokenSigningKey="$$(openssl rand -base64 29 | tr -d '=+/')" \
+		--version '$(KARGO_VERSION)' \
+		--wait
+.PHONY: install_kargo
