@@ -27,5 +27,6 @@ spec:
         name: 'in-cluster'
         namespace: 'kargo-demo-{{ .stage }}'
       syncPolicy:
+        automated: {}
         syncOptions:
         - CreateNamespace=true
