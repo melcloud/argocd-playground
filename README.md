@@ -18,11 +18,11 @@ To install Argo CD with https, followings are required:
 
 All above steps are packaged into different make commands:
 ```bash
-make add_helm_repos
 make install_cert_manager
 make install_nginx
 make install_argocd
 make install_argo_rollouts
+make install_kargo
 ```
 
 In addition to install Argo CD, it needs to be configured to create application automatically. It requires:

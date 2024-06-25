@@ -7,25 +7,26 @@ spec:
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
   generators:
-  - git:
-      repoURL: https://github.com/bjss/lunch-and-learn-argocd-playground.git
-      revision: kargo-demo
-      directories:
-      - path: apps/stages/*
+  - list:
+      elements:
+      - stage: dev
+      - stage: uat
+      - stage: prod
   template:
     metadata:
-      name: 'kargo-demo-{{ .path.basename }}'
+      name: 'kargo-demo-{{ .stage }}'
       annotations:
-        kargo.akuity.io/authorized-stage: 'kargo-demo:{{ .path.basename }}'
+        kargo.akuity.io/authorized-stage: 'kargo-demo:{{ .stage }}'
     spec:
       project: kargo-demo
       source:
         repoURL: https://github.com/bjss/lunch-and-learn-argocd-playground.git
-        targetRevision: kargo-demo
-        path: '{{ .path.path }}'
+        targetRevision: 'kargo/stages/{{ .stage }}'
+        path: 'apps/stages/{{ .stage }}'
       destination:
         name: 'in-cluster'
-        namespace: 'kargo-demo-{{ .path.basename }}'
+        namespace: 'kargo-demo-{{ .stage }}'
       syncPolicy:
+        automated: {}
         syncOptions:
         - CreateNamespace=true
