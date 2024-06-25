@@ -22,7 +22,6 @@ make install_cert_manager
 make install_nginx
 make install_argocd
 make install_argo_rollouts
-make install_kargo
 ```
 
 In addition to install Argo CD, it needs to be configured to create application automatically. It requires:
@@ -31,6 +30,12 @@ In addition to install Argo CD, it needs to be configured to create application 
 - ApplicationSet to generate Application
 
 This can be done by using `make argo_setup`. The script will ask for your github username and personal access token (scoped).
+
+### Kargo
+> The setup in this repository is not secure!! It hard-coded the password hash.
+Kargo is an high level abstraction on top of Argo CD which can be used to promote artifacts through multiple stages.
+
+To install Kargo, run `make install_kargo` and `make kargo_setup`.
 
 ### Create everything end to end
 Run `make all` to create every components end to end
@@ -45,6 +50,7 @@ Run `make help`
 | Components      | URL                           |
 |-----------------|-------------------------------|
 | Argo CD         | https://argocd.dev.local:8443 |
+| Kargo           | https://kargo.dev.local:8443  |
 | Demo APP DEV    | https://dev.app.local:8443    |
 | Demo APP UAT    | https://uat.app.local:8443    |
 | Demo APP PROD   | https://prod.app.local:8443   |
