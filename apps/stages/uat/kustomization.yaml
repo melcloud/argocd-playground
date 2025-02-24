@@ -1,0 +1,37 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+configMapGenerator:
+- name: index-html-content
+  files:
+  - index.html
+- name: ingress-config
+  literals:
+  - host=uat.app.local
+  - secret_name=uat-app-tls
+
+replacements:
+- source:
+    kind: ConfigMap
+    name: ingress-config
+    fieldPath: data.host
+  targets:
+  - select:
+      kind: Ingress
+      name: ingress
+    fieldPaths:
+    - spec.rules.0.host
+    - spec.tls.0.hosts.0
+- source:
+    kind: ConfigMap
+    name: ingress-config
+    fieldPath: data.secret_name
+  targets:
+  - select:
+      kind: Ingress
+      name: ingress
+    fieldPaths:
+    - spec.tls.0.secretName
+
+resources:
+- ../../base
